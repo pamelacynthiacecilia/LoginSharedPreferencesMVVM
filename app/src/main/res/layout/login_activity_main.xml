@@ -40,7 +40,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="ingrese su correo"
+        android:hint="ingrese su email"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -53,7 +53,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="ingrese su clave"
+        android:hint="ingrese su contraseña"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -82,4 +82,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btIngresar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
