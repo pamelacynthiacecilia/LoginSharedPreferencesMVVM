@@ -3,7 +3,6 @@ package com.pamcompany.tp1_login_sharepreferences.ui.login;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,7 +10,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.pamcompany.tp1_login_sharepreferences.request.ApiClient;
-import com.pamcompany.tp1_login_sharepreferences.ui.ErrorDialog;
 import com.pamcompany.tp1_login_sharepreferences.ui.registro.RegistroMainActivity;
 
 
@@ -73,12 +71,6 @@ public class LoginViewModel extends AndroidViewModel {
 
         return valido;
     }
-
-
-
-
-
-
 
 
 }

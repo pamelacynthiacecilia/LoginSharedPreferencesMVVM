@@ -6,9 +6,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.pamcompany.tp1_login_sharepreferences.databinding.LoginActivityMainBinding;
+
 import com.pamcompany.tp1_login_sharepreferences.ui.ErrorDialog;
 import com.pamcompany.tp1_login_sharepreferences.ui.registro.RegistroMainActivity;
+import com.pamcompany.tp1_login_sharepreferences.databinding.LoginActivityMainBinding;
 
 public class LoginMainActivity extends AppCompatActivity {
 
@@ -42,8 +43,6 @@ public class LoginMainActivity extends AppCompatActivity {
         binding.btIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // binding.textInputLayoutPassword.setError(null);
-               // binding.textInputLayoutEmail.setError(null);
                 vm.ingresar(binding.etEmailLogin.getText().toString(), binding.etClaveLogin.getText().toString());
             }
         });

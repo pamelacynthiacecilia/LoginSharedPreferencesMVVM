@@ -7,7 +7,6 @@ import com.pamcompany.tp1_login_sharepreferences.model.Usuario;
 
 public class ApiClient {
     private static SharedPreferences sp;
-
     private static SharedPreferences conectar(Context context){
         if(sp==null){
             sp= context.getSharedPreferences("datos", 0);
