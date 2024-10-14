@@ -1,5 +1,6 @@
 package com.pamcompany.tp1_login_sharepreferences.ui.registro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.pamcompany.tp1_login_sharepreferences.model.Usuario;
 import com.pamcompany.tp1_login_sharepreferences.ui.ErrorDialog;
 import com.pamcompany.tp1_login_sharepreferences.databinding.RegistroActivityMainBinding;
 import com.pamcompany.tp1_login_sharepreferences.ui.SuccessDialog;
@@ -49,6 +51,21 @@ public class RegistroMainActivity extends AppCompatActivity {
             }
         });
 
+
+        vm.getUsuarioMutable().observe(this, new Observer<Usuario>() {
+            @Override
+            public void onChanged(Usuario usuario) {
+                binding.etDni.setText(usuario.getDni()+"");
+                binding.etApellido.setText(usuario.getApellido());
+                binding.etNombre.setText(usuario.getNombre());
+                binding.etEmail.setText(usuario.getEmail());
+                binding.etPassword.setText(usuario.getPassword());
+            }
+        });
+
+        // Recupera datos del Intent que inició esta actividad
+        Intent intent = getIntent();
+        vm.leerUsuario(intent);
 
     }
 }

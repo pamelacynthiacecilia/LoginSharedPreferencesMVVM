@@ -51,6 +51,8 @@ public class LoginMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginMainActivity.this, RegistroMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("UsuarioLogueado",false);
                 startActivity(intent);
             }
         });

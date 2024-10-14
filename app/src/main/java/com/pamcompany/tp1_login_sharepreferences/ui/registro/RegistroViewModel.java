@@ -2,6 +2,8 @@ package com.pamcompany.tp1_login_sharepreferences.ui.registro;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -15,42 +17,61 @@ public class RegistroViewModel extends AndroidViewModel {
     private Context context;
     private MutableLiveData<String> mjeError;
     private MutableLiveData<String> mjeSuccess;
+    private MutableLiveData<Usuario> usuarioMutable;
+
     public RegistroViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
     }
 
-    public LiveData<String> getMjeError(){
-        if (mjeError == null){
+    public LiveData<String> getMjeError() {
+        if (mjeError == null) {
             mjeError = new MutableLiveData<>();
         }
         return mjeError;
     }
 
-    public LiveData<String> getMjeSuccess(){
-        if (mjeSuccess == null){
+    public LiveData<String> getMjeSuccess() {
+        if (mjeSuccess == null) {
             mjeSuccess = new MutableLiveData<>();
         }
         return mjeSuccess;
     }
 
-    public void registrarUsuario(String dni,String nombre, String apellido, String email, String password ) {
-        if (validaCampos(dni,nombre,apellido,email,password)) {
+    public LiveData<Usuario> getUsuarioMutable() {
+            usuarioMutable = new MutableLiveData<>();
+            return usuarioMutable;
+    }
+
+    public void registrarUsuario(String dni, String nombre, String apellido, String email, String password) {
+        if (validaCampos(dni, nombre, apellido, email, password)) {
             Usuario usuario = new Usuario(Long.parseLong(dni), nombre, apellido, email, password);
-            ApiClient.guardar(context,usuario);
+            ApiClient.guardar(context, usuario);
             mjeSuccess.setValue("Exito al guardar el registro");
         }
     }
 
-    private boolean validaCampos(String dni, String nombre, String apellido, String email, String password){
+    private boolean validaCampos(String dni, String nombre, String apellido, String email, String password) {
+     // Concateno los valores en un solo String
+        String datos = "Datos: " + "DNI: " + dni + ", Nombre: " + nombre + ", Apellido: " + apellido +
+                ", Email: " + email + ", Password: " + password;
+        Log.d("Datos", datos);
 
-            boolean sinError = true;
-            if (dni.isBlank() || nombre.isBlank() || apellido.isBlank() || email.isBlank() ||password.isBlank() ) {
-                mjeError.setValue("Debe completar el valor de todos los campos");
-                sinError = false;
-            }
+        boolean sinError = true;
+        if (dni.isBlank() || nombre.isBlank() || apellido.isBlank() || email.isBlank() || password.isBlank()) {
+            mjeError.setValue("Debe completar el valor de todos los campos");
+            sinError = false;
+        }
 
-            return sinError;
+        return sinError;
+    }
+
+    public void leerUsuario(Intent intent) {
+       // Log.d("value intent", String.valueOf(intent));
+        if (intent.getBooleanExtra("UsuarioLogueado", true)) {
+            Usuario usuario = ApiClient.leer(context);
+            usuarioMutable.setValue(usuario);
         }
 
     }
+}

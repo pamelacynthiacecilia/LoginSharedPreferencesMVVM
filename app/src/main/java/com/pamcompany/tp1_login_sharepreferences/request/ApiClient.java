@@ -1,8 +1,6 @@
 package com.pamcompany.tp1_login_sharepreferences.request;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.pamcompany.tp1_login_sharepreferences.model.Usuario;
 
 public class ApiClient {

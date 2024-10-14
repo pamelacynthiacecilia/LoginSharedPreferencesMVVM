@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.pamcompany.tp1_login_sharepreferences.model.Usuario;
 import com.pamcompany.tp1_login_sharepreferences.request.ApiClient;
 import com.pamcompany.tp1_login_sharepreferences.ui.registro.RegistroMainActivity;
 
@@ -45,11 +46,13 @@ public class LoginViewModel extends AndroidViewModel {
         mjePasswordError.setValue(null);
 
         if (validarCampos(email, password)) {
-            if (ApiClient.login(context, email, password) != null) {
+            Usuario user= ApiClient.login(context, email, password);
+            if (user != null) {
                 Intent intent = new Intent(context, RegistroMainActivity.class);
-                intent.putExtra("existingUser", true);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("UsuarioLogueado",true);
                 context.startActivity(intent);
+
             } else {
                 mjeEmailError.setValue("email o contraseña incorrecta.");
             }
@@ -58,19 +61,18 @@ public class LoginViewModel extends AndroidViewModel {
 
     private boolean validarCampos(String email, String password){
 
-        boolean valido = true;
+        boolean sinError = true;
         if (email.isBlank()) {
             mjeEmailError.setValue("Debe ingresar un email valido");
-            valido = false;
+            sinError = false;
         }
 
         if (password.isBlank()){
             mjePasswordError.setValue("Debe ingresar contraseña!");
-            valido = false;
+            sinError = false;
         }
 
-        return valido;
+        return sinError;
     }
-
 
 }
